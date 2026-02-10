@@ -57,7 +57,7 @@
         .container {
             max-width: 800px;
             margin: 30px auto;
-            background: white;
+            background: rgb(227, 213, 213);
             padding: 20px;
             border-radius: 5px;
         }
@@ -74,14 +74,16 @@
         }
 
         button {
-            background-color: green;
-            color: white;
+            background-color: rgb(96, 33, 55);
+            color: rgb(255, 255, 255);
             border: none;
             cursor: pointer;
         }
 
         h3 {
             margin-top: 30px;
+            color: #56242b;
+            font-family: Georgia, 'Times New Roman', Times, serif;
         }
 
         .item {
@@ -122,21 +124,21 @@
 
     <!-- FORM -->
     <form id="bagForm">
-        <label>Your Budget (₱):</label>
+        <label style="color: #43171e;">Your Budget (₱):</label>
         <input type="number" id="num1" placeholder="e.g. 1500" required>
 
         <button type="submit">Find Bags</button>
     </form>
 
     <!-- RESULTS -->
-    <h3>👜 Affordable Bags</h3>
+    <h3> Affordable Bags</h3>
     <div id="affordable">
-        <p>Enter your budget to see affordable bags.</p>
+        <p style="color: #43171e; font-family: Georgia, 'Times New Roman', Times, serif;">Enter your budget to see affordable bags.</p>
     </div>
 
-    <h3>🔥 Discounted Bags</h3>
+    <h3> Discounted Bags</h3>
     <div id="discounted">
-        <p>Discounted items will appear here.</p>
+        <p style="color: #43171e; font-family: Georgia, 'Times New Roman', Times, serif;">Discounted items will appear here.</p>
     </div>
 
 </div>
@@ -160,7 +162,11 @@
             { name: "Canvas Tote Bag", price: 700, discount: 0 },
             { name: "Simple Sling Bag", price: 900, discount: 0 },
             { name: "Mini Backpack", price: 1600, discount: 25 },
+            { name: "Medium leather bag", price: 2000, discount: 0 },
+            { name: "Mini leather bag", price: 1000, discount: 0 },
             { name: "Leather Handbag", price: 3000, discount: 40 },
+            { name: "computer bag", price: 1300, discount: 0 },
+            { name: "Mini bag", price:800 , discount: 0 },
             { name: "Travel Backpack", price: 2500, discount: 30 }
             
         ];
@@ -207,5 +213,10 @@
 
 </body>
 </html>
+
+
+
+
+
 
 
