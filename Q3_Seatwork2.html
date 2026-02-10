@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title> Q3 Seatwork 2</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #cfcccc;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background-color: #913b48;
+            color: rgb(232, 203, 203);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+        }
+
+        .nav-left {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: rgb(203, 132, 132);
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 20px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-search input {
+            padding: 6px;
+            border-radius: 4px;
+            border: none;
+            color: #913b48;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        h3 {
+            margin-top: 30px;
+        }
+
+        .item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+
+        .discount {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="nav-left" style="font-family:'Times New Roman', Times, serif;">Affordable BagFinder</div>
+
+    <div class="nav-links">
+        <a href="#">Shop</a>
+        <a href="#">Locate</a>
+        <a href="#">Sale</a>
+    </div>
+
+    <div class="nav-search">
+        <input type="text" id="searchInput" placeholder="Search bags...">
+    </div>
+</div>
+
+<!-- MAIN CONTAINER -->
+<div class="container">
+
+    <h2 style="font-family:Georgia, 'Times New Roman', Times, serif; color: #43171e;">Looking for Affordable Bags?</h2>
+    <p style="font-family:Georgia, 'Times New Roman', Times, serif; color: #43171e;">Type your budget to find affordable and discounted bags!</p>
+
+    <!-- FORM -->
+    <form id="bagForm">
+        <label>Your Budget (₱):</label>
+        <input type="number" id="num1" placeholder="e.g. 1500" required>
+
+        <button type="submit">Find Bags</button>
+    </form>
+
+    <!-- RESULTS -->
+    <h3>👜 Affordable Bags</h3>
+    <div id="affordable">
+        <p>Enter your budget to see affordable bags.</p>
+    </div>
+
+    <h3>🔥 Discounted Bags</h3>
+    <div id="discounted">
+        <p>Discounted items will appear here.</p>
+    </div>
+
+</div>
+
+<!-- SCRIPT -->
+<script>
+    document.getElementById("bagForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        plus();
+    });
+
+    document.getElementById("searchInput").addEventListener("keyup", function() {
+        plus();
+    });
+
+    function plus() {
+        let budget = Number(document.getElementById("num1").value);
+        let search = document.getElementById("searchInput").value.toLowerCase();
+
+        let bags = [
+            { name: "Canvas Tote Bag", price: 700, discount: 0 },
+            { name: "Simple Sling Bag", price: 900, discount: 0 },
+            { name: "Mini Backpack", price: 1600, discount: 25 },
+            { name: "Leather Handbag", price: 3000, discount: 40 },
+            { name: "Travel Backpack", price: 2500, discount: 30 }
+            
+        ];
+
+        let affordableHTML = "";
+        let discountedHTML = "";
+
+        for (let i = 0; i < bags.length; i++) {
+            let finalPrice = bags[i].price - (bags[i].price * bags[i].discount / 100);
+            let matchesSearch = bags[i].name.toLowerCase().includes(search);
+
+            if (!matchesSearch) continue;
+
+            // Affordable
+            if (bags[i].discount === 0 && bags[i].price <= budget) {
+                affordableHTML += `
+                    <div class="item">
+                        <strong>${bags[i].name}</strong><br>
+                        Price: ₱${bags[i].price}
+                    </div>
+                `;
+            }
+
+            // Discounted
+            if (bags[i].discount > 0 && finalPrice <= budget) {
+                discountedHTML += `
+                    <div class="item">
+                        <strong>${bags[i].name}</strong><br>
+                        Original: ₱${bags[i].price}<br>
+                        <span class="discount">Discount: ${bags[i].discount}%</span><br>
+                        <strong>Now: ₱${finalPrice.toFixed(2)}</strong>
+                    </div>
+                `;
+            }
+        }
+
+        document.getElementById("affordable").innerHTML =
+            affordableHTML || "<p>No affordable bags found.</p>";
+
+        document.getElementById("discounted").innerHTML =
+            discountedHTML || "<p>No discounted bags found.</p>";
+    }
+</script>
+
+</body>
+</html>
+
+
